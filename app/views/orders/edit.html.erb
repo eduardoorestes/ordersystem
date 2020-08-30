@@ -1,0 +1,22 @@
+<%= form_for([@order]) do |f| %>
+    
+    <%= f.label :description %> </br>
+    <%= f.text_field :description %></p>
+
+    <!-- combo_box -->
+    <!-- %= f.label :state % -->
+    <!-- %= f.collection_select :state_id, State.all, :id, :description, {} % -->
+
+    <%= f.label :state %>
+    <%= f.collection_radio_buttons(:state_id, State.all , :id, :description) do |s| %>
+        <% if @order.state_id == 1 && s.text != 'Concluded' %>
+            <%= s.label { s.radio_button + s.text } %>
+        <% end %>
+        <% if @order.state_id == 2 && s.text != 'Pending' %>
+            <%= s.label { s.radio_button + s.text } %>
+        <% end %>
+    <% end %>
+
+    <%= submit_tag "Send" %>
+
+<% end %>

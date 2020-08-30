@@ -1,0 +1,11 @@
+<%= link_to "New Order", new_order_path, :class => "" %><p>
+
+<% @order.each do |order| %>
+    <%= order.id %> -
+    <%= order.description %> -
+    <%= order.state.description %>  
+    <% if order.state_id != 4 %> <!-- se não for permitido alterar nem a descrição da order != 3 -->
+        - <%= link_to "Edit", edit_order_path(order.id) %>
+    <% end %>
+    <br>
+<% end %>
