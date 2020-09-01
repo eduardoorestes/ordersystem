@@ -1,11 +1,18 @@
-<%= link_to "New Order", new_order_path, :class => "" %><p>
+<div class="card w-50">
+    <div class="card-header">
+        Featured
+    </div>
+    <div class="card-body">
+        <%= link_to "New Order", new_order_path, class: "btn btn-secondary" %><p>
 
-<% @order.each do |order| %>
-    <%= order.id %> -
-    <%= order.description %> -
-    <%= order.state.description %>  
-    <% if order.state_id != 4 %> <!-- se não for permitido alterar nem a descrição da order != 3 -->
-        - <%= link_to "Edit", edit_order_path(order.id) %>
-    <% end %>
-    <br>
-<% end %>
+        <% @order.each do |order| %>
+            <%= order.id %> -
+            <%= order.description %> -
+            <%= order.state.description %>  
+            <% if order.state_id != 4 %> <!-- se não for permitido alterar nem a descrição da order != 3 -->
+                - <%= link_to "Edit", edit_order_path(order.id), class: "btn btn-dark" %>
+            <% end %>
+            <br>
+        <% end %>
+    </div>
+</div>
