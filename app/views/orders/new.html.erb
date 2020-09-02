@@ -1,20 +1,13 @@
-<div class="card w-50">
-    <div class="card-header">
-        Featured
-    </div>
-    <div class="card-body">
-        <%= form_for([@order]) do |f| %>
+<%= form_for([@order]) do |f| %>
 
-            <%= f.label :description %> </br>
-            <%= f.text_field :description %></p>
+    <%= f.label :description %> </br>
+    <%= f.text_field :description %></p>
 
-            <!-- combo_box -->
-            <!-- %= f.label :state % -->
-            <!-- %= f.collection_select :state_id, State.all, :id, :description, {} % -->
+    <!-- combo_box -->
+    <!-- %= f.label :state % -->
+    <!-- %= f.collection_select :state_id, State.all, :id, :description, {} % -->
 
-            <%= f.hidden_field :state_id, :value => 1 %>
-            <%= submit_tag "Send" %>
+    <%= f.hidden_field :state_id, :value => 1 %>
+    <%= submit_tag "Send" %>
 
-        <% end %>
-    </div>
-</div>
+<% end %>

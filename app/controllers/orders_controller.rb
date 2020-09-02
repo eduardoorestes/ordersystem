@@ -7,6 +7,7 @@ class OrdersController < ApplicationController
     def index
         @order = Order.all
         @state = State.all
+        @info = "Home"
     end
 
     def show
@@ -15,6 +16,7 @@ class OrdersController < ApplicationController
 
     def new
         @order = Order.new
+        @info = "New"
     end
 
     def create
@@ -28,6 +30,7 @@ class OrdersController < ApplicationController
     end
 
     def edit
+        @info = "Edit"
     end
 
     def update

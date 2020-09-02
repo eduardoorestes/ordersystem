@@ -1,34 +1,27 @@
-<div class="card w-50">
-    <div class="card-header">
-        Featured
+<%= form_for([@order]) do |f| %>
+
+    <div class="form-group">
+        <%= f.label :description %>: 
+        <%= f.text_field :description, class: 'form-control mb-2' %></p>
+
+        <!-- combo_box -->
+        <!-- %= f.label :state % -->
+        <!-- %= f.collection_select :state_id, State.all, :id, :description, {} % -->
+
+        <%= f.label :state %>:
+        <div class="custom-control custom-radio">
+            <%= f.collection_radio_buttons(:state_id, State.all , :id, :description) do |s| %>
+                <% if @order.state_id == 1 && s.text != 'Concluded' %>
+                    <%= s.label {s.radio_button(class: "custom-control-input") +
+                                s.label(class: "custom-control-label")}%><br>
+                <% end %>
+                <% if @order.state_id == 2 && s.text != 'Pending' %>
+                    <%= s.label {s.radio_button(class: "custom-control-input") +
+                                s.label(class: "custom-control-label")}%><br>
+                <% end %>
+            <% end %>
+        </div>
+        <%= submit_tag "Send" %>
     </div>
-    <div class="card-body">
-        <%= form_for([@order]) do |f| %>
 
-            <div class="form-group">
-                <%= f.label :description %>: 
-                <%= f.text_field :description, class: 'form-control mb-2' %></p>
-
-                <!-- combo_box -->
-                <!-- %= f.label :state % -->
-                <!-- %= f.collection_select :state_id, State.all, :id, :description, {} % -->
-
-                <%= f.label :state %>:
-                <div class="custom-control custom-radio">
-                    <%= f.collection_radio_buttons(:state_id, State.all , :id, :description) do |s| %>
-                        <% if @order.state_id == 1 && s.text != 'Concluded' %>
-                            <%= s.label {s.radio_button(class: "custom-control-input") +
-                                        s.label(class: "custom-control-label")}%><br>
-                        <% end %>
-                        <% if @order.state_id == 2 && s.text != 'Pending' %>
-                            <%= s.label {s.radio_button(class: "custom-control-input") +
-                                        s.label(class: "custom-control-label")}%><br>
-                        <% end %>
-                    <% end %>
-                </div>
-                <%= submit_tag "Send" %>
-            </div>
-
-        <% end %>
-    </div>
-</div>
+<% end %>

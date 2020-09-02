@@ -7,8 +7,59 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="row justify-content-center">
+    <div class="card">
+      <div class="card-header">
+          Order - <%= @info %>
+      </div>
+      <div class="card-body">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
 
-<%= yield %>
+
+
+
+
+  <table id="teste" class="display responsive no-wrap">
+    <thead>
+        <tr>
+          <td>123</td>
+          <td>456</td>
+          <td>789</td>
+        </tr>
+    </thead>
+  <tbody>
+      <tr>
+        <td>asdf<td>
+        <td>asdf</td>
+        <td>asdf</td>
+      </tr>
+      <tr>
+      <td>asdf<td>
+      <td>asdf</td>
+      <td>asdf</td>
+    </tr>
+    <tr>
+    <td>aaaa<td>
+    <td>aaaa</td>
+    <td>aa</td>
+  </tr>
+   </tbody>
+  </table>
+  
+  
+
+
+
+
+  <script>
+$('#teste').DataTable({
+  autoFill: true
+});
+</script>
+  
 
 </body>
 </html>
