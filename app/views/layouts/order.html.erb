@@ -7,59 +7,31 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="row justify-content-center">
+  <br>
+  <div class="row justify-content-center" >
     <div class="card">
-      <div class="card-header">
+      <div class="card-header" align="center">
           Order - <%= @info %>
       </div>
       <div class="card-body">
         <%= yield %>
       </div>
+      <div align="center">
+          <% if current_page?(orders_path) %>
+            <%= link_to "New Order", new_order_path, class: "btn btn-secondary" %>
+          <% end %>
+          <% unless current_page?(orders_path) %>
+            <%= link_to "Return", orders_path, class: "btn btn-dark" %>
+          <% end %>
+      </div>
+      <br>
     </div>
   </div>
-
-
-
-
-
-  <table id="teste" class="display responsive no-wrap">
-    <thead>
-        <tr>
-          <td>123</td>
-          <td>456</td>
-          <td>789</td>
-        </tr>
-    </thead>
-  <tbody>
-      <tr>
-        <td>asdf<td>
-        <td>asdf</td>
-        <td>asdf</td>
-      </tr>
-      <tr>
-      <td>asdf<td>
-      <td>asdf</td>
-      <td>asdf</td>
-    </tr>
-    <tr>
-    <td>aaaa<td>
-    <td>aaaa</td>
-    <td>aa</td>
-  </tr>
-   </tbody>
-  </table>
   
-  
-
-
-
-
+<% if alert %>
   <script>
-$('#teste').DataTable({
-  autoFill: true
-});
-</script>
-  
-
+    alert("<%= alert %>");
+  </script> -->
+<% end %>
 </body>
 </html>

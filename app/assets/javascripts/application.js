@@ -18,5 +18,4 @@
 //= require bootstrap
 // app/assets/javascripts/application.js
 //= require dataTables/jquery.dataTables
-//= require dataTables/extras/dataTables.autoFill
 //= require_tree .

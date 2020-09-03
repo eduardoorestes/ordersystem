@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
         @order = Order.create(params_order)
 
         unless @order.errors.any?
-            redirect_to orders_path, notice: "Success!"
+            redirect_to orders_path, alert: "Order successfully registered!"
         else
             render :new
         end
@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
 
     def update
         if @order.update(params_order)
-            redirect_to orders_path, notice: "Edited!"
+            redirect_to orders_path, alert: "Order successfully edited!"
         else
             render :edit
         end

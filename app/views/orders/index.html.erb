@@ -1,11 +1,26 @@
-<%= link_to "New Order", new_order_path, class: "btn btn-secondary" %><p>
-
-<% @order.each do |order| %>
-    <%= order.id %> -
-    <%= order.description %> -
-    <%= order.state.description %>  
-    <% if order.state_id != 4 %> <!-- se não for permitido alterar nem a descrição da order != 3 -->
-        - <%= link_to "Edit", edit_order_path(order.id), class: "btn btn-dark" %>
-    <% end %>
-    <br>
+<% unless @order.blank? %>
+    <table id="order" width="400">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Description</td>
+                <td>State</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <% @order.each do |order| %>
+                <tr>
+                    <td><%= order.id %></td>
+                    <td><%= order.description %></td>
+                    <td><%= order.state.description %></td>
+                    <td>  
+                        <% if order.state_id != 4 %> <!-- se não for permitido alterar nem a descrição da order != 3 -->
+                            <%= link_to "Edit", edit_order_path(order.id), class: "btn btn-dark" %>
+                        <% end %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
 <% end %>

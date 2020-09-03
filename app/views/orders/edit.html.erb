@@ -4,11 +4,9 @@
         <%= f.label :description %>: 
         <%= f.text_field :description, class: 'form-control mb-2' %></p>
 
-        <!-- combo_box -->
-        <!-- %= f.label :state % -->
-        <!-- %= f.collection_select :state_id, State.all, :id, :description, {} % -->
-
-        <%= f.label :state %>:
+        <% if @order.state_id != 3 %> 
+            <%= f.label :state %>:
+        <% end %>
         <div class="custom-control custom-radio">
             <%= f.collection_radio_buttons(:state_id, State.all , :id, :description) do |s| %>
                 <% if @order.state_id == 1 && s.text != 'Concluded' %>
