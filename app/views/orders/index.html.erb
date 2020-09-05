@@ -1,4 +1,19 @@
 <% unless @order.blank? %>
+    <table id="order" width="360">
+        <tr>
+            <td>
+                <%= form_tag(search_page_path, :method => "get") do %>
+                    <div class="input-group">
+                        <%= search_field_tag :search, params[:search], placeholder: "Search", class: "form-control" %>
+                        <div class="input-group-btn">
+                            <%= button_tag "Search", :class => 'btn btn-info', :name => nil %>
+                        </div>
+                    </div>
+                <% end %>
+            </td>
+        </tr>
+    </table>
+    <br>
     <table id="order" width="400">
         <thead>
             <tr>
@@ -24,3 +39,4 @@
         </tbody>
     </table>
 <% end %>
+

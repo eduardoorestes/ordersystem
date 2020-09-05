@@ -21,7 +21,6 @@ class OrdersController < ApplicationController
 
     def create
         @order = Order.create(params_order)
-
         unless @order.errors.any?
             redirect_to orders_path, alert: "Order successfully registered!"
         else
@@ -42,6 +41,18 @@ class OrdersController < ApplicationController
     end
 
     def destroy
+    end
+
+    def search
+        if params[:search].blank?
+            redirect_to(root_path, alert: "Empty search.") and return
+        else
+            @info = "Search Result"
+            @parameter = params[:search].downcase
+            @results = Order.all.where("lower(description) LIKE :search
+                                        OR id LIKE :search",
+                                        search: "%#{@parameter}%")
+        end
     end
 
     
