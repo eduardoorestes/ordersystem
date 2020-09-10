@@ -1,4 +1,7 @@
 class Order < ActiveRecord::Base
-  belongs_to :state
-
+  enum state: { 
+    pending: 'Pending',
+    in_progress: 'In Progress',
+    completed: 'Completed'
+  }
 end

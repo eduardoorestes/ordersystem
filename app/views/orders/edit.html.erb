@@ -1,25 +1,23 @@
 <%= form_for([@order]) do |f| %>
+  <div class="form-group">
+    <%= f.label :description %>: 
+    <%= f.text_field :description, class: 'form-control mb-2' %></p>
 
-    <div class="form-group">
-        <%= f.label :description %>: 
-        <%= f.text_field :description, class: 'form-control mb-2' %></p>
-
-        <% if @order.state_id != 3 %> 
-            <%= f.label :state %>:
+    <% unless @order.completed? %> 
+      <%= f.label :state %>:        
+      <div class="custom-control custom-radio">
+        <% Order.states.keys.each do |state_as| %>
+          <% if @order.pending? && state_as != 'completed' %>
+            <%= f.radio_button :state , state_as %>
+            <%= f.label state_as.to_sym %><br>
+          <% end %>
+          <% if @order.in_progress? && state_as != 'pending' %>
+            <%= f.radio_button :state , state_as %>
+            <%= f.label state_as.to_sym %><br>
+          <% end %>
         <% end %>
-        <div class="custom-control custom-radio">
-            <%= f.collection_radio_buttons(:state_id, State.all , :id, :description) do |s| %>
-                <% if @order.state_id == 1 && s.text != 'Concluded' %>
-                    <%= s.label {s.radio_button(class: "custom-control-input") +
-                                s.label(class: "custom-control-label")}%><br>
-                <% end %>
-                <% if @order.state_id == 2 && s.text != 'Pending' %>
-                    <%= s.label {s.radio_button(class: "custom-control-input") +
-                                s.label(class: "custom-control-label")}%><br>
-                <% end %>
-            <% end %>
-        </div>
-        <%= submit_tag "Send" %>
-    </div>
-
+      </div>
+    <% end %>
+    <%= submit_tag "Send" %>
+  </div>
 <% end %>

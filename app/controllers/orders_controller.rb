@@ -1,69 +1,65 @@
 class OrdersController < ApplicationController
+  before_action :set_order, only: [:edit, :update]
 
-    layout 'order'
+  def index
+    @order = Order.all
+    @info = "Home"
+  end
 
-    before_action :set_order, only: [:edit, :update]
+  def show
+    @order = Order.find(params[:id])
+  end
 
-    def index
-        @order = Order.all
-        @state = State.all
-        @info = "Home"
+  def new
+    @order = Order.new
+    @info = "New"
+  end
+
+  def create
+    if params_order.blank?
+      redirect_to orders_path, alert: "Order unregistred (Empty Order)."
+    else
+      @order = Order.create(params_order)
+      unless @order.errors.any?
+        redirect_to orders_path, alert: "Order successfully registered!"
+      else
+        render :new
+      end
     end
+  end
 
-    def show
-        @order = Order.find(params[:id])
+  def edit
+    @info = "Edit"
+  end
+
+  def update
+    if @order.update(params_order)
+      redirect_to orders_path, alert: "Order successfully edited!"
+    else
+      render :edit
     end
+  end
+  
+  def destroy
+  end
 
-    def new
-        @order = Order.new
-        @info = "New"
+  def search
+    if params[:search].blank?
+      redirect_to(root_path, alert: "Empty search.")
+    else
+      @info = "Search Result"
+      @results = Order.where('description LIKE :search OR id = :search', search: '%'+"#{params[:search]}"+'%')
     end
+  end
 
-    def create
-        @order = Order.create(params_order)
-        unless @order.errors.any?
-            redirect_to orders_path, alert: "Order successfully registered!"
-        else
-            render :new
-        end
-    end
+  private
 
-    def edit
-        @info = "Edit"
-    end
+  def set_order
+    @order = Order.find(params[:id])
+  end
 
-    def update
-        if @order.update(params_order)
-            redirect_to orders_path, alert: "Order successfully edited!"
-        else
-            render :edit
-        end
-    end
-
-    def destroy
-    end
-
-    def search
-        if params[:search].blank?
-            redirect_to(root_path, alert: "Empty search.") and return
-        else
-            @info = "Search Result"
-            @parameter = params[:search].downcase
-            @results = Order.all.where("lower(description) LIKE :search
-                                        OR id LIKE :search",
-                                        search: "%#{@parameter}%")
-        end
-    end
-
-    
-    private
-
-    def set_order
-        @order = Order.find(params[:id])
-    end
-
-    def params_order
-        params.require(:order).permit(:id, :description, :state_id, :created_at, :updated_at)
-    end
+  def params_order
+    params.require(:order).permit(:id, :description, :state)
+  end
 
 end

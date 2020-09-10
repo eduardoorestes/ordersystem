@@ -11,16 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200828231908) do
+ActiveRecord::Schema.define(version: 20200909011702) do
 
   create_table "orders", force: :cascade do |t|
-    t.string   "description", limit: 255
-    t.integer  "state_id",    limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string "description", limit: 255
+    t.string "state",       limit: 255
   end
-
-  add_index "orders", ["state_id"], name: "index_orders_on_state_id", using: :btree
 
   create_table "states", force: :cascade do |t|
     t.string   "description", limit: 255
@@ -28,5 +24,4 @@ ActiveRecord::Schema.define(version: 20200828231908) do
     t.datetime "updated_at",              null: false
   end
 
-  add_foreign_key "orders", "states"
 end

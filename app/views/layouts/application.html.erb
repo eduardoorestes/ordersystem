@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Ordersystem</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+  <head>
+    <title>Ordersystem</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <br>
+    <div class="row justify-content-center" >
+      <div class="card">
+        <div class="card-header" align="center">
+          Order - <%= @info %>
+        </div>
+        <div class="card-body">
+          <%= yield %>
+        </div>
+        <div align="center">
+          <% if current_page?(orders_path) %>
+            <%= link_to "New Order", new_order_path, class: "btn btn-secondary" %>
+          <% end %>
+          <% unless current_page?(orders_path) %>
+            <%= link_to "Return", orders_path, class: "btn btn-dark" %>
+          <% end %>
+        </div>
+        <br>
+      </div>
+    </div>
+    
+  <% if alert %>
+    <script>
+      alert("<%= alert %>");
+    </script>
+  <% end %>
+  </body>
 </html>
