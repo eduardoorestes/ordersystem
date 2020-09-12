@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
 
   def index
     @order = Order.all
-    @info = "Home"
+    @info = 'Home'
   end
 
   def show
@@ -12,16 +12,16 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @info = "New"
+    @info = 'New'
   end
 
   def create
     if params_order.blank?
-      redirect_to orders_path, alert: "Order unregistred (Empty Order)."
+      redirect_to orders_path, alert: 'Order unregistred (Empty Order).'
     else
       @order = Order.create(params_order)
       unless @order.errors.any?
-        redirect_to orders_path, alert: "Order successfully registered!"
+        redirect_to orders_path, alert: 'Order successfully registered!'
       else
         render :new
       end
@@ -29,12 +29,12 @@ class OrdersController < ApplicationController
   end
 
   def edit
-    @info = "Edit"
+    @info = 'Edit'
   end
 
   def update
     if @order.update(params_order)
-      redirect_to orders_path, alert: "Order successfully edited!"
+      redirect_to orders_path, alert: 'Order successfully edited!'
     else
       render :edit
     end
@@ -45,9 +45,9 @@ class OrdersController < ApplicationController
 
   def search
     if params[:search].blank?
-      redirect_to(root_path, alert: "Empty search.")
+      redirect_to(root_path, alert: 'Empty search.')
     else
-      @info = "Search Result"
+      @info = 'Search Result'
       @results = Order.where('description LIKE :search OR id = :search', search: '%'+"#{params[:search]}"+'%')
     end
   end

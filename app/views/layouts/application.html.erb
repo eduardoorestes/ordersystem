@@ -18,10 +18,10 @@
         </div>
         <div align="center">
           <% if current_page?(orders_path) %>
-            <%= link_to "New Order", new_order_path, class: "btn btn-secondary" %>
+            <%= link_to 'New Order', new_order_path, class: 'btn btn-secondary' %>
           <% end %>
           <% unless current_page?(orders_path) %>
-            <%= link_to "Return", orders_path, class: "btn btn-dark" %>
+            <%= link_to 'Return', orders_path, class: 'btn btn-dark' %>
           <% end %>
         </div>
         <br>
