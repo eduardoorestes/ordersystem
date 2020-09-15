@@ -35,6 +35,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Bootstrap 4 ruby gem for Ruby on Rails (Sprockets) and Hanami (formerly Lotus).
 gem 'bootstrap'
 
+# AASM is a continuation of the acts-as-state-machine rails plugin, built for plain Ruby objects.
+gem 'aasm', '~> 5.1', '>= 5.1.1'
+
 # jquery datatables for rails
 gem 'jquery-datatables-rails', '~> 3.4'
 
@@ -48,6 +51,6 @@ group :development do
   gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  # gem 'spring'
 end
 

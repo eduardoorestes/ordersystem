@@ -28,7 +28,7 @@
         <tr>
           <td><%= order.id %></td>
           <td><%= order.description %></td>
-          <td><%= order.read_attribute('state') %></td> 
+          <td><%= order.aasm_state %></td> 
           <td>  
             <% unless order.completed? %>
               <%= link_to 'Edit', edit_order_path(order), class: 'btn btn-dark' %>

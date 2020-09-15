@@ -33,6 +33,15 @@ class OrdersController < ApplicationController
   end
 
   def update
+    @order.complete if @order.in_progress?
+    @order.progress  if @order.pending?
+    ##
+    #  if @order.pending?
+    #    @order.progress
+    #  elsif @order.progress
+    #    @order.complete
+    #  end
+    ##
     if @order.update(params_order)
       redirect_to orders_path, alert: 'Order successfully edited!'
     else
@@ -59,7 +68,7 @@ class OrdersController < ApplicationController
   end
 
   def params_order
-    params.require(:order).permit(:id, :description, :state)
+    params.require(:order).permit(:id, :description, :aasm_state)
   end
 
 end

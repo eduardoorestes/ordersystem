@@ -1,5 +1,4 @@
-<%= form_for([@order]) do |f| %>
-	<%= f.hidden_field :state, value: Order.states[:pending] %>
+<%= form_for([@order]) do |f| %>  
 	<%= f.label :description %> </br>
 	<%= f.text_field :description %></p>
 	<%= submit_tag 'Send' %>
