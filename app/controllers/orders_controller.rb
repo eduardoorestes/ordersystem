@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:edit, :update]
+  before_action :set_order, only: [:edit, :update, :destroy]
 
   def index
     @order = Order.all
@@ -50,6 +50,11 @@ class OrdersController < ApplicationController
   end
   
   def destroy
+      if @order.destroy
+        redirect_to orders_path, alert: 'Order successfully deleted'
+      else
+        render :index
+      end
   end
 
   def search

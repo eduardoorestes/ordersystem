@@ -21,6 +21,7 @@
         <td>Description</td>
         <td>State</td>
         <td></td>
+        <td></td>
       </tr>
     </thead>
     <tbody>
@@ -33,6 +34,13 @@
             <% unless order.completed? %>
               <%= link_to 'Edit', edit_order_path(order), class: 'btn btn-dark' %>
             <% end %>
+          </td>
+          <td>
+            <%= link_to order_path(order.id), method: :delete, 
+                                               class: 'btn btn-warning',
+                                               data: {confirm: "Do you really want to delete #{order.description}?"} do %>
+              Delete
+             <% end %>
           </td>
         </tr>
       <% end %>
