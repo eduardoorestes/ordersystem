@@ -1,0 +1,7 @@
+<%= form_for([@order]) do |order| %>
+  <div class="form-group">
+    <%= order.label :description %>: 
+    <%= order.text_field :description, class: 'form-control mb-2' %></p>
+    <%= submit_tag "Send" %>
+  </div>
+<% end %>

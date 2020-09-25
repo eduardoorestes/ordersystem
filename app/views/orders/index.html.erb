@@ -2,17 +2,60 @@
   <table id="order" width="360">
     <tr>
       <td>
-        <%= form_tag(search_page_path, method: 'get') do %>
-          <div class="input-group">
-            <%= search_field_tag :search, params[:search], placeholder: 'Search', class: 'form-control' %>
-            <div class="input-group-btn">
-              <%= button_tag 'Search', class: 'btn btn-info', name: nil %>
-            </div>
-          </div>
+        <%= search_form_for @q do |f| %>
+          <%= f.label :description_cont %>
+          <%= f.search_field :description_cont %>
+          <%= f.submit %>
+        <% end %>
+        <% unless @result.blank? %>
+          <br>
+          <center>
+            <h2> Search Result </h2>
+          </center>
+          <br>
+          <table id="order" width="400">
+            <thead>
+              <tr>
+                <td>ID</td>
+                <td>Description</td>
+                <td>State</td>
+                <td></td>
+                <td></td>
+              </tr>
+            </thead>
+            <tbody>
+            <% @result.each do |result| %>
+                <tr>
+                  <td><%= result.id %></td>
+                  <td><%= result.description %></td>
+                  <td><%= result.aasm_state %></td> 
+                  <td>  
+                    <% unless result.completed? %>
+                      <%= link_to 'Edit', edit_order_path(result), class: 'btn btn-dark' %>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= link_to order_path(result.id),
+                                method: :delete, 
+                                class: 'btn btn-warning',
+                                data: {confirm: "Do you really want to delete #{result.description}?"} do %>
+                      Delete
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         <% end %>
       </td>
     </tr>
   </table>
+  <br>
+  <hr>
+  <br>
+  <center>
+    <h2> Order List </h2>
+  </center>
   <br>
   <table id="order" width="400">
     <thead>
@@ -36,9 +79,10 @@
             <% end %>
           </td>
           <td>
-            <%= link_to order_path(order.id), method: :delete, 
-                                               class: 'btn btn-warning',
-                                               data: {confirm: "Do you really want to delete #{order.description}?"} do %>
+            <%= link_to order_path(order.id),
+                        method: :delete, 
+                        class: 'btn btn-warning',
+                        data: {confirm: "Do you really want to delete #{order.description}?"} do %>
               Delete
              <% end %>
           </td>

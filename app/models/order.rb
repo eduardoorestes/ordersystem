@@ -1,9 +1,9 @@
 class Order < ActiveRecord::Base
   include AASM
-  
+
   aasm column: :aasm_state do
     state :pending, initial: true
-    state :in_progress , :completed
+    state :in_progress, :completed
 
     event :progress do
       transitions from: :pending, to: :in_progress
@@ -13,12 +13,4 @@ class Order < ActiveRecord::Base
       transitions from: :in_progress, to: :completed
     end
   end  
-  
-##  
-# enum state: { 
-#   pending: 'Pending',
-#   in_progress: 'In Progress',
-#   completed: 'Completed'
-#  }
-##
 end

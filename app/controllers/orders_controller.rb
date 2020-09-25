@@ -1,18 +1,18 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:edit, :update, :destroy]
-
+  before_action :set_order, only: [:edit, :update, :destroy]  
+ 
   def index
     @order = Order.all
-    @info = 'Home'
-  end
-
-  def show
-    @order = Order.find(params[:id])
+    @q = Order.search(params[:q])
+    if params[:q].blank?
+      @result = nil
+    else
+      @result = @q.result()
+    end
   end
 
   def new
     @order = Order.new
-    @info = 'New'
   end
 
   def create
@@ -29,19 +29,11 @@ class OrdersController < ApplicationController
   end
 
   def edit
-    @info = 'Edit'
   end
 
   def update
     @order.complete if @order.in_progress?
-    @order.progress  if @order.pending?
-    ##
-    #  if @order.pending?
-    #    @order.progress
-    #  elsif @order.progress
-    #    @order.complete
-    #  end
-    ##
+    @order.progress if @order.pending?
     if @order.update(params_order)
       redirect_to orders_path, alert: 'Order successfully edited!'
     else
@@ -50,19 +42,10 @@ class OrdersController < ApplicationController
   end
   
   def destroy
-      if @order.destroy
-        redirect_to orders_path, alert: 'Order successfully deleted'
-      else
-        render :index
-      end
-  end
-
-  def search
-    if params[:search].blank?
-      redirect_to(root_path, alert: 'Empty search.')
+    if @order.destroy
+      redirect_to orders_path, alert: 'Order successfully deleted'
     else
-      @info = 'Search Result'
-      @results = Order.where('description LIKE :search OR id = :search', search: '%'+"#{params[:search]}"+'%')
+      render :index
     end
   end
 
